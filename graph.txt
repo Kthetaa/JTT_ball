@@ -1,0 +1,26 @@
+3:423 531 half_shower pinball back_cross sholder_cross neck_cross nehan under_the_leg
+neck_cross:neck_tennis
+neck_tennis:neck_1count
+nehan:nehan_2count
+nehan_2count:nehcn531
+shower:high_low_shower medamayaki box
+box:N-box inverted_box
+high_low_shower:4shower
+4shower:4high_low_shower
+4high_low_shower:4high_middle_low_shower 5shower
+half_shower:windmill
+windmill:mill's_mess
+mill's_mess:boston_mess 423mill's
+423:441 2in1 423mill's
+441:7441
+531:53
+2in1:4 medamayaki
+4:53 5
+53:534
+534:5551 7441 7531
+5:744 645 6
+7441:744
+7531:97531
+744:97531
+97531:b97531
+6:b97531
