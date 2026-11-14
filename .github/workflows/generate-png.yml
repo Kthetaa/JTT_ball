@@ -26,7 +26,7 @@ jobs:
         run: pip install networkx matplotlib pydot
 
       - name: Generate PNG
-        run: python main.py
+        run: python make_graph.py
       
       - run: |
           git config user.name "github-actions[bot]"
