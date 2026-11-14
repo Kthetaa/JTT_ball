@@ -1,4 +1,4 @@
-3:423 531 half_shower pinball back_cross sholder_cross neck_cross nehan under_the_leg
+3:423 531 half_shower pinball back_cross sholder_cross neck_cross nehan under_the_leg front_cross
 back_cross:around_the_sholder
 sholder_corss:around_the_sholder
 neck_cross:neck_tennis
