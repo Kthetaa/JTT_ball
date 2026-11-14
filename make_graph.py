@@ -163,6 +163,7 @@ def draw_graph(G):
 
     ax.axis("off")
     fig.tight_layout()
+    fig.savefig("graph.png", dpi=300, bbox_inches="tight")
 
     # MatplotlibをTkinterに埋め込む
     graph_widget = FigureCanvasTkAgg(fig, master=canvas)
