@@ -6,7 +6,7 @@ front_cross:neck_front_back
 neck_cross:neck_tennis　neck_front_back
 neck_tennis:neck_1count
 nehan:nehan_2count
-nehan_2count:531nehan
+nehan_2count:531nehan 7531nehan
 531nehan:53nehan
 shower:high_low_shower medamayaki box
 box:N-box inverted_box shuffle
@@ -26,7 +26,7 @@ mill's_mess:boston_mess 423mill's
 53nehan:7333nehan
 5:744 645 6
 7441:744
-7531:97531
+7531:97531 7531nehan
 744:97531
 97531:b97531
 6:b97531 7
