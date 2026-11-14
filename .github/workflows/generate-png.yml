@@ -37,10 +37,12 @@ jobs:
           echo "Git status:"
           git status --short
 
-          if git diff --cached --quiet; then
-            echo "PNGに変更はありません"
-          else
-            echo "PNGに変更があります"
+      - name: Commit PNG
+        run: |
+          git add output.png
+          git diff --cached --quiet || (
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -m "Update PNG"
             git push
-          fi
+          )
