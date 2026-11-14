@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - run: pip install networkx
+      - run: pip install networkx matplotlib
       - run: python make_graph.py
 
       - run: |
