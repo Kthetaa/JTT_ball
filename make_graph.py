@@ -10,6 +10,7 @@ if os.environ.get("GITHUB_ACTIONS") != "true":
     from matplotlib.figure import Figure
 import pydot
 
+BASE_DIR = Path(__file__).resolve().parent
 
 def load_graph(filename):
     G = nx.DiGraph()
@@ -166,7 +167,7 @@ def draw_graph(G):
 
         ax.axis("off")
         fig.tight_layout()
-        fig.savefig("graph.png", dpi=300, bbox_inches="tight")
+        fig.savefig(BASE_DIR / "graph.png", dpi=300, bbox_inches="tight")
 
         # MatplotlibをTkinterに埋め込む
         graph_widget = FigureCanvasTkAgg(fig, master=canvas)
