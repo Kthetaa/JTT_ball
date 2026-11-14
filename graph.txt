@@ -1,5 +1,5 @@
 ball:3 shower
-3:423 531 half_shower pinball back_cross sholder_cross neck_cross nehan under_the_leg front_cross side_cascade
+3:423 531 half_shower pinball back_cross sholder_cross neck_cross nehan under_the_leg front_cross side_cascade dankan
 back_cross:around_the_sholder neck_front_back
 sholder_cross:around_the_sholder
 front_cross:neck_front_back
