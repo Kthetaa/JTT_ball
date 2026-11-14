@@ -1,10 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from pathlib import Path
-import tkinter as tk
-from tkinter import ttk
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
+import os
+# GitHub Actions以外でのみGUIを使用
+if os.environ.get("GITHUB_ACTIONS") != "true":
+    import tkinter as tk
+    from tkinter import ttk
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    from matplotlib.figure import Figure
 import pydot
 
 
@@ -70,117 +73,117 @@ def draw_graph(G):
                 x, y = map(float, p.strip('"').rstrip("!").split(","))
                 pos[name] = (x, y)
 
-
+    if os.environ.get("GITHUB_ACTIONS") != "true":
     # ウィンドウ
-    root = tk.Tk()
-    root.title("DAG Viewer")
-    root.geometry("1000x700")
+        root = tk.Tk()
+        root.title("DAG Viewer")
+        root.geometry("1000x700")
 
-    # スクロール可能な領域
-    frame = ttk.Frame(root)
-    frame.pack(fill=tk.BOTH, expand=True)
+        # スクロール可能な領域
+        frame = ttk.Frame(root)
+        frame.pack(fill=tk.BOTH, expand=True)
 
-    canvas = tk.Canvas(frame)
-    scrollbar_y = ttk.Scrollbar(
-        frame, orient=tk.VERTICAL, command=canvas.yview
-    )
-    scrollbar_x = ttk.Scrollbar(
-        frame, orient=tk.HORIZONTAL, command=canvas.xview
-    )
-
-    canvas.configure(
-        yscrollcommand=scrollbar_y.set,
-        xscrollcommand=scrollbar_x.set
-    )
-
-    scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
-    scrollbar_x.pack(side=tk.BOTTOM, fill=tk.X)
-    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-    # マウスホイールによる上下スクロール
-    def on_mousewheel(event):
-        canvas.yview_scroll(
-            -1 * (event.delta // 120),
-            "units"
+        canvas = tk.Canvas(frame)
+        scrollbar_y = ttk.Scrollbar(
+            frame, orient=tk.VERTICAL, command=canvas.yview
+        )
+        scrollbar_x = ttk.Scrollbar(
+            frame, orient=tk.HORIZONTAL, command=canvas.xview
         )
 
-    # Shift + マウスホイールで左右スクロール
-    def on_shift_mousewheel(event):
-        canvas.xview_scroll(
-            -1 * (event.delta // 120),
-            "units"
+        canvas.configure(
+            yscrollcommand=scrollbar_y.set,
+            xscrollcommand=scrollbar_x.set
         )
 
-    canvas.bind_all("<MouseWheel>", on_mousewheel)
-    canvas.bind_all("<Shift-MouseWheel>", on_shift_mousewheel)
+        scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
+        scrollbar_x.pack(side=tk.BOTTOM, fill=tk.X)
+        canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-    # グラフを描画する領域
-    # 座標の範囲を取得
-    xs = [x for x, y in pos.values()]
-    ys = [y for x, y in pos.values()]
+        # マウスホイールによる上下スクロール
+        def on_mousewheel(event):
+            canvas.yview_scroll(
+                -1 * (event.delta // 120),
+                "units"
+            )
 
-    width = max(xs) - min(xs)
-    height = max(ys) - min(ys)
+        # Shift + マウスホイールで左右スクロール
+        def on_shift_mousewheel(event):
+            canvas.xview_scroll(
+                -1 * (event.delta // 120),
+                "units"
+            )
 
-    # 1インチあたりの座標の長さ
-    scale = 100
+        canvas.bind_all("<MouseWheel>", on_mousewheel)
+        canvas.bind_all("<Shift-MouseWheel>", on_shift_mousewheel)
 
-    # キャンバスサイズを自動計算
-    fig_width = max(8, width / scale + 2)
-    fig_height = max(8, height / scale + 2)
+        # グラフを描画する領域
+        # 座標の範囲を取得
+        xs = [x for x, y in pos.values()]
+        ys = [y for x, y in pos.values()]
 
-    fig = Figure(
-        figsize=(fig_width, fig_height),
-        dpi=100
-    )
-    ax = fig.add_subplot(111)
+        width = max(xs) - min(xs)
+        height = max(ys) - min(ys)
 
-    nx.draw(
-        G,
-        pos,
-        ax=ax,
-        with_labels=True,
-        node_color="lightblue",
-        node_size=1500,
-        font_size=12,
-        arrows=True,
-        arrowsize=20,
-        connectionstyle="arc3,rad=0"
-    )
+        # 1インチあたりの座標の長さ
+        scale = 100
 
-    # 軸の表示範囲を固定
-    ax.set_aspect("equal")
+        # キャンバスサイズを自動計算
+        fig_width = max(8, width / scale + 2)
+        fig_height = max(8, height / scale + 2)
 
-    ax.set_xlim(
-        min(x for x, y in pos.values()) - 100,
-        max(x for x, y in pos.values()) + 100
-    )
+        fig = Figure(
+            figsize=(fig_width, fig_height),
+            dpi=100
+        )
+        ax = fig.add_subplot(111)
 
-    ax.set_ylim(
-        min(y for x, y in pos.values()) - 100,
-        max(y for x, y in pos.values()) + 100
-    )
+        nx.draw(
+            G,
+            pos,
+            ax=ax,
+            with_labels=True,
+            node_color="lightblue",
+            node_size=1500,
+            font_size=12,
+            arrows=True,
+            arrowsize=20,
+            connectionstyle="arc3,rad=0"
+        )
 
-    ax.axis("off")
-    fig.tight_layout()
-    fig.savefig("graph.png", dpi=300, bbox_inches="tight")
+        # 軸の表示範囲を固定
+        ax.set_aspect("equal")
 
-    # MatplotlibをTkinterに埋め込む
-    graph_widget = FigureCanvasTkAgg(fig, master=canvas)
-    graph_widget.draw()
+        ax.set_xlim(
+            min(x for x, y in pos.values()) - 100,
+            max(x for x, y in pos.values()) + 100
+        )
 
-    widget = graph_widget.get_tk_widget()
-    window_id = canvas.create_window(
-        0, 0, anchor="nw", window=widget
-    )
+        ax.set_ylim(
+            min(y for x, y in pos.values()) - 100,
+            max(y for x, y in pos.values()) + 100
+        )
 
-    # スクロール範囲を設定
-    def update_scroll_region(event=None):
-        canvas.configure(scrollregion=canvas.bbox("all"))
+        ax.axis("off")
+        fig.tight_layout()
+        fig.savefig("graph.png", dpi=300, bbox_inches="tight")
 
-    widget.bind("<Configure>", update_scroll_region)
+        # MatplotlibをTkinterに埋め込む
+        graph_widget = FigureCanvasTkAgg(fig, master=canvas)
+        graph_widget.draw()
 
-    root.mainloop()
+        widget = graph_widget.get_tk_widget()
+        window_id = canvas.create_window(
+            0, 0, anchor="nw", window=widget
+        )
+
+        # スクロール範囲を設定
+        def update_scroll_region(event=None):
+            canvas.configure(scrollregion=canvas.bbox("all"))
+
+        widget.bind("<Configure>", update_scroll_region)
+
+        root.mainloop()
 
 
 if __name__ == "__main__":
