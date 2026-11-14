@@ -4,7 +4,7 @@ name: Generate PNG
 on:
   push:
     paths:
-      - 'input.txt'
+      - 'graph.txt'
 
 permissions:
   contents: write
@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - run: python main.py
+      - run: python make_graph.py
 
       - run: |
           git config user.name "github-actions[bot]"
