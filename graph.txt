@@ -2,7 +2,7 @@
 neck_cross:neck_tennis
 neck_tennis:neck_1count
 nehan:nehan_2count
-nehan_2count:nehcn531
+nehan_2count:nehan531
 shower:high_low_shower medamayaki box
 box:N-box inverted_box
 high_low_shower:4shower
