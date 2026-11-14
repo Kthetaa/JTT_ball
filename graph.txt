@@ -2,7 +2,7 @@ ball:3 shower
 3:423 531 half_shower pinball back_cross sholder_cross neck_cross nehan under_the_leg front_cross side_cascade dankan 4_multiple_cascade
 under_the_leg:runner
 back_cross:around_the_sholder neck_front_back
-sholder_cross:around_the_sholder
+sholder_cross:around_the_sholder 423_sholder
 front_cross:neck_front_back
 neck_cross:neck_tennis　neck_front_back
 neck_tennis:neck_1count
@@ -18,7 +18,7 @@ high_low_shower:4shower
 half_shower:windmill
 windmill:mill's_mess
 mill's_mess:boston_mess 423mill's
-423:441 2in1 423mill's
+423:441 2in1 423mill's 423_sholder
 441:7441
 531:53 531nehan 531dankan
 2in1:4 medamayaki
