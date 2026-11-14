@@ -19,9 +19,15 @@ jobs:
         with:
           python-version: '3.12'
 
-      - run: pip install networkx matplotlib pydot
-      - run: python make_graph.py
+      - name: Install Graphviz
+        run: sudo apt-get update && sudo apt-get install -y graphviz
 
+      - name: Install Python libraries
+        run: pip install networkx matplotlib pydot
+
+      - name: Generate PNG
+        run: python main.py
+      
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
