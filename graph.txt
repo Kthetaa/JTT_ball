@@ -23,7 +23,7 @@ mill's_mess:boston_mess 423mill's
 423:441 2in1 423mill's 423_sholder
 441:7441
 531:53 531nehan 531dankan
-2in1:4 medamayaki　twist
+2in1:4 medamayaki　twist [54]24
 4:53 5
 53:534
 534:5551 7441 7531 53nehan
