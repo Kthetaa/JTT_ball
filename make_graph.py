@@ -1,3 +1,5 @@
+print("===== MAIN.PY START =====")
+
 import networkx as nx
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -9,6 +11,9 @@ if os.environ.get("GITHUB_ACTIONS") != "true":
     from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
     from matplotlib.figure import Figure
 import pydot
+
+print("実行ファイル:", Path(__file__).resolve())
+print("作業ディレクトリ:", Path.cwd())
 
 BASE_DIR = Path(__file__).resolve().parent
 
