@@ -10,7 +10,7 @@ nehan:nehan_2count
 nehan_2count:531nehan 7531nehan dankan_nehan
 dankan:dankan_nehan 531dankan
 531nehan:53nehan
-shower:high_low_shower medamayaki box
+shower:high_low_shower medamayaki box 4_half_shower
 box:N-box inverted_box shuffle_2count
 shuffle_2count:shuffle_1count
 high_low_shower:4shower
@@ -29,7 +29,7 @@ colum:twist
 1up_pirouette:3up_pirouette
 3up_pirouette:75300 5570022
 4:53 5
-53:534
+53:534 4_half_shower
 534:5551 7441 7531 53nehan
 53nehan:7333nehan
 5:744 645 6
