@@ -27,42 +27,15 @@ jobs:
 
       - name: Generate PNG
         run: python make_graph.py
-      
-      - run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          git add graph.png
-          
-          echo "Git status:"
-          git status --short
 
       - name: Commit PNG
         run: |
-          echo "=== PNGの状態 ==="
-          ls -l graph.png
-          sha256sum graph.png
-
-          echo "=== Gitの状態 ==="
-          git status --short
-          git check-ignore -v output.png || true
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -f graph.png
+          git add graph.png
 
           if ! git diff --cached --quiet; then
             git commit -m "Update PNG"
             git push
-          else
-            echo "PNGに変更がありません"
           fi
-
-      - name: Check PNG
-        run: |
-          echo "Generated:"
-          sha256sum graph.png
-
-          echo "Original:"
-          git show HEAD:graph.png | sha256sum
