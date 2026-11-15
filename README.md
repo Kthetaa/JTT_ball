@@ -16,4 +16,5 @@ b:c
 (自分も初めて使うので最低限の知識しかありません)  
 graph.txtを開いて右上の"Edit this file"のボタンを押すと編集できます.  
 編集が完了したら右上の"Commit changes"のボタンを押し, メモ欄のところに変更点を軽く書いてください.  
-"Commit changes"のボタンを押すと保存できます.  
+"Commit changes", "Propose change", "Create pull request"×2の順にボタンを押して変更をリクエストすれば完了です.
+あとは自分が反映させます.
