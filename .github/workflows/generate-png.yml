@@ -58,3 +58,11 @@ jobs:
           else
             echo "PNGに変更がありません"
           fi
+
+      - name: Check PNG
+        run: |
+          echo "Generated:"
+          sha256sum graph.png
+
+          echo "Original:"
+          git show HEAD:graph.png | sha256sum
