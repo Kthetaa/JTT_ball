@@ -169,6 +169,9 @@ def draw_graph(G):
         fig.tight_layout()
         fig.savefig(BASE_DIR / "graph.png", dpi=300, bbox_inches="tight")
         print("PNGを保存しました")
+        print("描画したオブジェクト数:", len(ax.get_children()))
+        print("Figureのサイズ:", fig.get_size_inches())
+        print("描画範囲:", ax.get_xlim(), ax.get_ylim())
 
         # MatplotlibをTkinterに埋め込む
         graph_widget = FigureCanvasTkAgg(fig, master=canvas)
