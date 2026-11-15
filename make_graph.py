@@ -74,6 +74,7 @@ def draw_graph(G):
                 x, y = map(float, p.strip('"').rstrip("!").split(","))
                 pos[name] = (x, y)
 
+    # 画面表示の設定
     if os.environ.get("GITHUB_ACTIONS") != "true":
     # ウィンドウ
         root = tk.Tk()
@@ -103,84 +104,63 @@ def draw_graph(G):
 
         # マウスホイールによる上下スクロール
         def on_mousewheel(event):
-            canvas.yview_scroll(
-                -1 * (event.delta // 120),
-                "units"
-            )
+            canvas.yview_scroll(-1 * (event.delta // 120), "units")
 
         # Shift + マウスホイールで左右スクロール
         def on_shift_mousewheel(event):
-            canvas.xview_scroll(
-                -1 * (event.delta // 120),
-                "units"
-            )
+            canvas.xview_scroll(-1 * (event.delta // 120), "units")
 
         canvas.bind_all("<MouseWheel>", on_mousewheel)
         canvas.bind_all("<Shift-MouseWheel>", on_shift_mousewheel)
 
-        # グラフを描画する領域
-        # 座標の範囲を取得
-        xs = [x for x, y in pos.values()]
-        ys = [y for x, y in pos.values()]
 
-        width = max(xs) - min(xs)
-        height = max(ys) - min(ys)
+    # グラフの描画設定（常に実行）
+    xs = [x for x, y in pos.values()]
+    ys = [y for x, y in pos.values()]
 
-        # 1インチあたりの座標の長さ
-        scale = 100
+    width = max(xs) - min(xs)
+    height = max(ys) - min(ys)
 
-        # キャンバスサイズを自動計算
-        fig_width = max(8, width / scale + 2)
-        fig_height = max(8, height / scale + 2)
+    scale = 100
+    fig_width = max(8, width / scale + 2)
+    fig_height = max(8, height / scale + 2)
 
-        fig = Figure(
-            figsize=(fig_width, fig_height),
-            dpi=100
-        )
-        ax = fig.add_subplot(111)
+    fig = Figure(figsize=(fig_width, fig_height), dpi=100)
+    ax = fig.add_subplot(111)
 
-        nx.draw(
-            G,
-            pos,
-            ax=ax,
-            with_labels=True,
-            node_color="lightblue",
-            node_size=1500,
-            font_size=12,
-            arrows=True,
-            arrowsize=20,
-            connectionstyle="arc3,rad=0"
-        )
+    nx.draw(
+        G,
+        pos,
+        ax=ax,
+        with_labels=True,
+        node_color="lightblue",
+        node_size=1500,
+        font_size=12,
+        arrows=True,
+        arrowsize=20,
+        connectionstyle="arc3,rad=0"
+    )
 
-        # 軸の表示範囲を固定
-        ax.set_aspect("equal")
+    ax.set_aspect("equal")
 
-        ax.set_xlim(
-            min(x for x, y in pos.values()) - 100,
-            max(x for x, y in pos.values()) + 100
-        )
+    ax.set_xlim(min(xs) - 100, max(xs) + 100)
+    ax.set_ylim(min(ys) - 100, max(ys) + 100)
 
-        ax.set_ylim(
-            min(y for x, y in pos.values()) - 100,
-            max(y for x, y in pos.values()) + 100
-        )
+    ax.axis("off")
+    fig.tight_layout()
 
-        ax.axis("off")
-        fig.tight_layout()
-        fig.savefig(BASE_DIR / "graph.png", dpi=300, bbox_inches="tight")
-        print("PNGを保存しました")
-        print("描画したオブジェクト数:", len(ax.get_children()))
-        print("Figureのサイズ:", fig.get_size_inches())
-        print("描画範囲:", ax.get_xlim(), ax.get_ylim())
+    # 画像は常に保存
+    fig.savefig(BASE_DIR / "graph.png", dpi=300, bbox_inches="tight")
 
+
+    # 画面表示
+    if os.environ.get("GITHUB_ACTIONS") != "true":
         # MatplotlibをTkinterに埋め込む
         graph_widget = FigureCanvasTkAgg(fig, master=canvas)
         graph_widget.draw()
 
         widget = graph_widget.get_tk_widget()
-        window_id = canvas.create_window(
-            0, 0, anchor="nw", window=widget
-        )
+        canvas.create_window(0, 0, anchor="nw", window=widget)
 
         # スクロール範囲を設定
         def update_scroll_region(event=None):
