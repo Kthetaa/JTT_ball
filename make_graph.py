@@ -16,7 +16,6 @@ def load_graph(filename):
     G = nx.DiGraph()
 
     with open(filename, "r", encoding="utf-8") as f:
-        #text = f.read()
         for line in f:
             line = line.strip()
 
@@ -38,9 +37,6 @@ def load_graph(filename):
 
             for neighbor in neighbors.split():
                 G.add_edge(vertex, neighbor)
-
-    #print("=== 読み込んだ内容 ===")
-    #print(text)
     
     return G
 
