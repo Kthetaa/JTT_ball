@@ -1,5 +1,3 @@
-print("===== MAIN.PY START =====")
-
 import networkx as nx
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -12,16 +10,13 @@ if os.environ.get("GITHUB_ACTIONS") != "true":
     from matplotlib.figure import Figure
 import pydot
 
-print("実行ファイル:", Path(__file__).resolve())
-print("作業ディレクトリ:", Path.cwd())
-
 BASE_DIR = Path(__file__).resolve().parent
 
 def load_graph(filename):
     G = nx.DiGraph()
 
     with open(filename, "r", encoding="utf-8") as f:
-        text = f.read()
+        #text = f.read()
         for line in f:
             line = line.strip()
 
@@ -44,8 +39,8 @@ def load_graph(filename):
             for neighbor in neighbors.split():
                 G.add_edge(vertex, neighbor)
 
-    print("=== 読み込んだ内容 ===")
-    print(text)
+    #print("=== 読み込んだ内容 ===")
+    #print(text)
     
     return G
 
