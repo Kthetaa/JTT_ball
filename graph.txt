@@ -11,7 +11,8 @@ nehan_2count:531nehan 7531nehan dankan_nehan
 dankan:dankan_nehan 531dankan
 531nehan:53nehan
 shower:high_low_shower medamayaki box
-box:N-box inverted_box shuffle
+box:N-box inverted_box shuffle_2count
+shuffle_2count:shuffle_1count
 high_low_shower:4shower
 4shower:4high_low_shower
 4high_low_shower:4high_middle_low_shower 5shower
