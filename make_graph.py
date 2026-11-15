@@ -7,7 +7,7 @@ if os.environ.get("GITHUB_ACTIONS") != "true":
     import tkinter as tk
     from tkinter import ttk
     from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-    from matplotlib.figure import Figure
+from matplotlib.figure import Figure
 import pydot
 
 BASE_DIR = Path(__file__).resolve().parent
